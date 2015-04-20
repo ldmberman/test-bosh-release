@@ -34,6 +34,11 @@ cd test-release
 ./update  # update git submodules
 bosh upload release ./dev-releases/test-release/test-release-0+dev.1.yml
 bosh deployment manifest.yml
+```
+
+Replace `director_uuid` in the `manifest.yml` with your director's uuid (`bosh status --uuid`), then
+
+```
 bosh -n deploy
 ```
 
