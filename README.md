@@ -1,9 +1,9 @@
 # What is it
 
 Simple BOSH release [made from scratch](http://bosh.io/docs/create-release.html) for educational purposes.
-It consists of 2 jobs starting primitive Golang Web servers and one job running the infinite loop in bash script.
+It consists of 2 jobs starting primitive Golang Web servers and one job running the infinite loop written in bash script.
 
-The code of the `main_job` was packed into main.tar.gz blob for testing.
+The code of the `main_job` was packed into `main.tar.gz` blob for testing.
 
 ```
 while :;
@@ -13,7 +13,7 @@ do
 done
 ```
 
-Golang sources were taken from [CF CAT assets](https://github.com/cloudfoundry/cf-acceptance-tests/tree/master/assets/golang)
+`golang_app`'s sources were taken from [CF CAT assets](https://github.com/cloudfoundry/cf-acceptance-tests/tree/master/assets/golang)
 
 ## Not suitable for production
 
@@ -28,15 +28,14 @@ You have to deploy [BOSH Lite](https://github.com/cloudfoundry/bosh-lite) first.
 
 ## Deploy to BOSH Lite
 
-`git clone https://github.com/ldmberman/test-bosh-release.git test-release`
-
-`cd test-release`
-
-`bosh upload release ./dev-releases/test-release/test-release-0+dev.1.yml`
-
-`bosh deployment manifest.yml`
-
-`bosh -n deploy`
+```
+git clone https://github.com/ldmberman/test-bosh-release.git test-release
+cd test-release
+./update  # update git submodules
+bosh upload release ./dev-releases/test-release/test-release-0+dev.1.yml
+bosh deployment manifest.yml
+bosh -n deploy
+```
 
 Ping `golang_job`s:
 
@@ -65,11 +64,11 @@ Press [CTRL+C] to stop..
 
 To create new release make some changes, then:
 
-`bosh create release --force`
-
-`bosh upload ./dev-releases/test-release/test-release-0+dev.<new version>.yml`
-
-`bosh -n deploy`
+```
+bosh create release --force
+bosh upload ./dev-releases/test-release/test-release-0+dev.<new version>.yml
+bosh -n deploy
+```
 
 ## Debugging packaging scripts
 
