@@ -1,0 +1,37 @@
+#!/bin/bash
+
+RUN_DIR=/var/vcap/sys/run/golang_job
+LOG_DIR=/var/vcap/sys/log/golang_job
+PIDFILE=${RUN_DIR}/pid
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    echo $$ > $PIDFILE
+
+    export GOPATH=/var/vcap/packages/golang_app
+    export PATH=$GOPATH/bin:$PATH
+
+    export PORT=<%= properties.golang_job.port %>
+
+    exec golang_app
+      >>  $LOG_DIR/golang_job.stdout.log \
+      2>> $LOG_DIR/golang_job.stderr.log
+
+    ;;
+
+  stop)
+
+    kill -9 `cat $PIDFILE`
+
+    rm -f $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}" ;;
+
+esac

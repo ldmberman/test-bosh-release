@@ -1,0 +1,15 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+# go binary
+export PATH=/var/vcap/packages/go_1.4.2/bin:$PATH
+
+# go apps
+export GOPATH=/var/vcap/packages/golang_app/
+mkdir -p $GOPATH/src $GOPATH/pkg $GOPATH/bin
+
+cp -r golang_app $GOPATH/src/
+
+pushd $GOPATH/src/golang_app
+    go install
+popd

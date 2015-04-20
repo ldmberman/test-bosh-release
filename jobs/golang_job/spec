@@ -1,0 +1,12 @@
+---
+name: golang_job
+templates:
+  golang_ctl.erb: /bin/ctl
+
+packages:
+- golang_app
+
+properties:
+  golang_job.port:
+    description: Port the Web server listens on
+    default: 8000

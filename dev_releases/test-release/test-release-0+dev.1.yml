@@ -1,0 +1,35 @@
+---
+packages:
+- name: go_1.4.2
+  version: 3833f1c74a0cd8606b495577530d3d84e3ba706e
+  fingerprint: 3833f1c74a0cd8606b495577530d3d84e3ba706e
+  sha1: ed39573104e83ca8037a81b39b659f9645a8cfec
+  dependencies: []
+- name: main
+  version: 375349e77cd67415ca441ae26bdf28eaf1a928bd
+  fingerprint: 375349e77cd67415ca441ae26bdf28eaf1a928bd
+  sha1: 3d21ef832ad80e3be45ce0553b0d3ba5bba36ae6
+  dependencies: []
+- name: golang_app
+  version: 7a6682b0de382baa0cb3425658e9550a099d0628
+  fingerprint: 7a6682b0de382baa0cb3425658e9550a099d0628
+  sha1: 7a071fedfbdf3c942aae545d82b7036e0d6b9325
+  dependencies:
+  - go_1.4.2
+jobs:
+- name: main_job
+  version: f40176fadb2561ef42a77387a3a6796d14368a69
+  fingerprint: f40176fadb2561ef42a77387a3a6796d14368a69
+  sha1: fc31986b629b431a8ee85f02d0aada72fac513e4
+- name: golang_job
+  version: 306a1f9581885fc821e38a326f353e7513959f49
+  fingerprint: 306a1f9581885fc821e38a326f353e7513959f49
+  sha1: b84f936cfed01b01750fb971f0a0b45635c7daa4
+license:
+  version: ba37e277d6487278e97844f0e4ac9c7c5ce32ed5
+  fingerprint: ba37e277d6487278e97844f0e4ac9c7c5ce32ed5
+  sha1: 9cc99e0a2ccdc795c878cf581e6932593e7d2b35
+commit_hash: '00000000'
+uncommitted_changes: true
+name: test-release
+version: 0+dev.1

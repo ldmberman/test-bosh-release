@@ -1,0 +1,82 @@
+---
+name: test-release
+director_uuid: 845bd688-885c-4a1a-9cc3-5e133121884b
+
+compilation:
+  cloud_properties:
+    name: random
+  network: compilation
+  reuse_compilation_vms: true
+  workers: 1
+
+release:
+  name: test-release
+  version: latest
+
+networks:
+- name: workers
+  subnets:
+  - cloud_properties:
+      name: random
+    range: 10.244.5.0/30
+    reserved:
+    - 10.244.5.1
+    static:
+    - 10.244.5.2
+  - cloud_properties:
+      name: random
+    range: 10.244.5.4/30
+    reserved:
+    - 10.244.5.5
+    static:
+    - 10.244.5.6
+  - cloud_properties:
+      name: random
+    range: 10.244.5.8/30
+    reserved:
+    - 10.244.5.9
+    static:
+    - 10.244.5.10
+- name: compilation
+  type: dynamic
+  cloud_properties: {}
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-600000
+  max_in_flight: 1
+  update_watch_time: 30000-600000
+
+resource_pools:
+- cloud_properties:
+    name: random
+  name: test-release-resource-pool
+  network: workers
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+
+jobs:
+- name: golang_job
+  templates:
+  - name: golang_job
+    release: test-release
+  instances: 2
+  networks:
+  - name: workers
+    static_ips:
+    - 10.244.5.6
+    - 10.244.5.10
+    properties:
+      external_host: test-release.10.244.0.34.xip.io
+  resource_pool: test-release-resource-pool  
+- name: main_job
+  templates:
+  - name: main_job
+    release: test-release
+  instances: 1
+  networks:
+  - name: workers
+    static_ips:
+    - 10.244.5.2
+  resource_pool: test-release-resource-pool

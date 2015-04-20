@@ -1,0 +1,7 @@
+---
+name: go_1.4.2
+
+dependencies: []
+
+files:
+- go/**/*

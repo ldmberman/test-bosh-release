@@ -1,0 +1,8 @@
+---
+name: golang_app
+
+dependencies:
+- go_1.4.2
+
+files:
+- golang_app/**/*

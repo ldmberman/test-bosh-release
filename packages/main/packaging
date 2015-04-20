@@ -1,0 +1,7 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+tar xzf main_blob/main.tar.gz
+
+mkdir -p ${BOSH_INSTALL_TARGET}/bin
+cp main ${BOSH_INSTALL_TARGET}/bin/

@@ -1,0 +1,12 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+export PATH=${BOSH_INSTALL_TARGET}/bin:$PATH
+
+mkdir -p ${BOSH_INSTALL_TARGET}/bin
+mkdir -p ${BOSH_INSTALL_TARGET}/goroot
+
+# install go
+pushd go/src
+   GOROOT=${BOSH_INSTALL_TARGET}/goroot GOBIN=${BOSH_INSTALL_TARGET}/bin ./all.bash
+popd
